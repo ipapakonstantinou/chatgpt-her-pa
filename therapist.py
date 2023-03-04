@@ -4,6 +4,8 @@ openai.api_key = config.OPENAI_API_KEY
 
 messages = [{"role": "system", "content": 'You are a therapist. Respond to all input in 25 words or less.'}]
 
+# subprocess.call(["speak", "I hear you. Please go on."])
+subprocess.call(["espeak-ng", "-v", "el", "Σε ακούω. Παρακαλώ συνεχίστε."])
 def transcribe(audio):
     global messages
 
@@ -17,7 +19,7 @@ def transcribe(audio):
     system_message = response["choices"][0]["message"]
     messages.append(system_message)
 
-    subprocess.call(["say", system_message['content']])
+    subprocess.call(["espeak-ng", "-v", "el", system_message['content']])
 
     chat_transcript = ""
     for message in messages:
